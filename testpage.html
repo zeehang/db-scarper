@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+<body>
+    <form id="testform">
+        <input type="text" id="field1">
+        <input type="submit" onclick="testfunction();return false;">
+        <p>
+            Text return: <span id="phpReturn"></span>
+        </p>
+    </form>
+      <script>
+        function testfunction(){
+            var URL = document.getElementById("field1").value;
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status == 200)
+            {
+                document.getElementById("phpReturn").innerHTML = this.responseText;
+            }
+            };
+            console.log(URL);
+            xmlhttp.open("POST", "test.php?q=" + URL, true);
+            xmlhttp.send();
+           // evt.preventDefault();
+        }
+       // document.getElementById('testform').addEventListener('submit', testfunction);
+    </script>
+</body>
+

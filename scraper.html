@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="scraper.css" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css?family=Karla|Montserrat:400,600,700" rel="stylesheet">
+        <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"></script>
+    </head>
+    <body>
+        <div class="header-container">
+            <h1 id="title">Scraper</h1>
+            <form  method="post" id="submission" autocomplete="off">
+                <input type="text" id="field1" name="URL" placeholder="Daily Bruin URL">
+                <input type="submit" id="submit-button" value="Scrape!" onclick="testfunction(); return false;">
+                <script src="scraper.js"></script>
+            </form>
+        </div>
+        <div class="body-content">
+            <div id="phpReturn">
+                
+            </div>
+            <h1 style="color: black">Output:</h1>
+            <script>
+                function testfunction(){
+                var URL = document.getElementById("field1").value;
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status == 200)
+                    {
+                        document.getElementById("phpReturn").innerHTML = this.responseText;
+                    }
+                };
+                console.log(URL);
+                xmlhttp.open("POST", "scraper.php?URL=" + URL, true);
+                xmlhttp.send();
+            // evt.preventDefault();
+                }
+            </script>
+        </div>
+    </body>
+</html>
